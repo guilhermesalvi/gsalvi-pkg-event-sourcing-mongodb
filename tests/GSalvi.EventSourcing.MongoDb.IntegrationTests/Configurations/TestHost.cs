@@ -12,6 +12,8 @@ namespace GSalvi.EventSourcing.MongoDb.IntegrationTests.Configurations
 
         public TestHost()
         {
+            Console.WriteLine(Path.Combine(Directory.GetCurrentDirectory(), "Configurations"));
+            
             var configurationBuilder =
                 new ConfigurationBuilder()
                     .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Configurations"))

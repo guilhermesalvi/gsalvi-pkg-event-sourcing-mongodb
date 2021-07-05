@@ -24,7 +24,7 @@ jobs:
     - name: Copy file
       uses: canastro/copy-action@0.0.2
       with:
-        source: "DbSeed.json"
-        target: "DbSeed.json/Configurations"
+        source: "Configurations/DbSeed.json"
+        target: "Configurations/DbSeed.json"
     - name: Test
       run: dotnet test --no-build --verbosity normal

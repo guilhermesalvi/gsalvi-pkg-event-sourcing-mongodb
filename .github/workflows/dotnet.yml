@@ -26,6 +26,6 @@ jobs:
         mkdir -p ./Configurations
         cp ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/DbSeed.json ./Configurations
         cp ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/appsettings.json ./Configurations
-        ls -a
+        ls -R
     - name: Test
       run: dotnet test --no-build --verbosity normal

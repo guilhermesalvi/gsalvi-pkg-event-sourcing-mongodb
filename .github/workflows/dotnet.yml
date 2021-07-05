@@ -22,6 +22,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Copy file
-      run: cp ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/DbSeed.json ./Configurations/DbSeed.json
+      run: cp ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/DbSeed.json ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/appsettings.json ./Configurations/
     - name: Test
       run: dotnet test --no-build --verbosity normal

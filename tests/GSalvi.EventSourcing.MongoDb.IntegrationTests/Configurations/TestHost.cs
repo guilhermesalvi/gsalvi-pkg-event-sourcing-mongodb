@@ -14,7 +14,7 @@ namespace GSalvi.EventSourcing.MongoDb.IntegrationTests.Configurations
         {
             var configurationBuilder =
                 new ConfigurationBuilder()
-                    .SetBasePath($"{Directory.GetCurrentDirectory()}/Configurations")
+                    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Configurations"))
                     .AddJsonFile("appsettings.json", true)
                     .Build();
 

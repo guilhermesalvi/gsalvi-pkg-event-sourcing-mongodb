@@ -22,9 +22,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Copy file
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: "./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/DbSeed.json"
-        target: "./DbSeed.json"
+      run: cp ./tests/GSalvi.EventSourcing.MongoDb.IntegrationTests/Configurations/DbSeed.json ./Configurations/DbSeed.json
     - name: Test
       run: dotnet test --no-build --verbosity normal

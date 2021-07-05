@@ -29,4 +29,17 @@
     <ProjectReference Include="..\..\src\GSalvi.EventSourcing.MongoDb\GSalvi.EventSourcing.MongoDb.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Configurations\DbSeed.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Configurations\appsettings.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

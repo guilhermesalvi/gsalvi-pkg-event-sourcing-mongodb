@@ -1,0 +1,36 @@
+﻿{
+  "_id": "5bd18f3d-f4a7-4044-a62e-6215a849ed9c",
+  "_t": [
+    "Snapshot",
+    "MySnapshot"
+  ],
+  "AggregateId": "998acdf2-0a55-fe45-9641-e9c3d164b4f3",
+  "EventType": "UserUpdated",
+  "SerializedData": "{'userId': 'fb4ffa0c-0f08-4b68-bd23-316a48aa8ffa'}",
+  "Timestamp": "2021-03-09T23:07:21.904Z",
+  "UserId": "fb4ffa0c-0f08-4b68-bd23-316a48aa8ffa"
+}
+{
+  "_id": "b02b0abc-c1c2-4c7d-9602-773dbb5fe586",
+  "_t": [
+    "Snapshot",
+    "MySnapshot"
+  ],
+  "AggregateId": "998acdf2-0a55-fe45-9641-e9c3d164b4f3",
+  "EventType": "UserUpdated",
+  "SerializedData": "{'userId': 'fb4ffa0c-0f08-4b68-bd23-316a48aa8ffa'}",
+  "Timestamp": "2021-03-09T23:07:42.904Z",
+  "UserId": "fb4ffa0c-0f08-4b68-bd23-316a48aa8ffa"
+}
+{
+  "_id": "20a4ef58-9029-4bd0-aff0-282aaa99e33c",
+  "_t": [
+    "Snapshot",
+    "MySnapshot"
+  ],
+  "AggregateId": "ccc72596-24f5-4f9f-bac2-dad0e5dbfac1",
+  "EventType": "UserUpdated",
+  "SerializedData": "{'userId': '148bc77d-1e32-4a3b-8a7b-6117d81b9771'}",
+  "Timestamp": "2021-03-09T23:07:45.904Z",
+  "UserId": "fb4ffa0c-0f08-4b68-bd23-316a48aa8ffa"
+}

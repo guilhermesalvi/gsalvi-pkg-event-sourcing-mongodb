@@ -19,11 +19,6 @@ jobs:
         dotnet-version: 5.0.*
     - name: Restore dependencies
       run: dotnet restore
-    - name: Copy file
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: "DbSeed.json"
-        target: "Configurations/DbSeed.json"
     - name: Build
       run: dotnet build --no-restore
     - name: Test

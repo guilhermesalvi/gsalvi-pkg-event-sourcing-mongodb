@@ -21,10 +21,19 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Copy file
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: "DbSeed.json"
-        target: "Configurations/DbSeed.json"
+    - name: Printing
+      run: |
+        echo "All:"
+        echo "${{ steps.abc.outputs.all }}"
+        echo "Added:"
+        echo "${{ steps.abc.outputs.added }}"
+        echo "Removed:"
+        echo "${{ steps.abc.outputs.removed }}"
+        echo "Renamed:"
+        echo "${{ steps.abc.outputs.renamed }}"
+        echo "Modified:"
+        echo "${{ steps.abc.outputs.modified }}"
+        echo "Added+Modified:"
+        echo "${{ steps.abc.outputs.added_modified }}"
     - name: Test
       run: dotnet test --no-build --verbosity normal

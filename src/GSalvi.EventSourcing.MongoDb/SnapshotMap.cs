@@ -8,7 +8,7 @@ namespace GSalvi.EventSourcing.MongoDb
     {
         public static void ConfigureMap()
         {
-            BsonClassMap.RegisterClassMap<Snapshot>(cm =>
+            BsonClassMapper.Instance.Register<Snapshot>(cm =>
             {
                 cm.AutoMap();
                 cm.MapIdMember(x => x.Id).SetSerializer(new GuidSerializer(BsonType.String));
@@ -19,7 +19,7 @@ namespace GSalvi.EventSourcing.MongoDb
 
         public static void ConfigureGenericMap<T>() where T : Snapshot
         {
-            BsonClassMap.RegisterClassMap<Snapshot>(cm =>
+            BsonClassMapper.Instance.Register<Snapshot>(cm =>
             {
                 cm.AutoMap();
                 cm.SetIsRootClass(true);

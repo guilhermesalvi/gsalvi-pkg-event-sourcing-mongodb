@@ -1,64 +1,62 @@
-﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization;
 
-namespace GSalvi.EventSourcing.MongoDb
+namespace GSalvi.EventSourcing.MongoDb;
+
+/// <summary>
+/// Defines extension methods to registering dependencies and middlewares
+/// </summary>
+[ExcludeFromCodeCoverage]
+public static class EventSourcingMongoDbExtensions
 {
     /// <summary>
-    /// Define extension methods to registering dependencies.
+    /// Adds required services to ASP.NET container to use event sourcing with MongoDb
     /// </summary>
-    public static class EventSourcingMongoDbExtensions
+    /// <param name="builder"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public static EventSourcingExtensionsBuilder<EventData> UseMongoDb(
+        this EventSourcingExtensionsBuilder<EventData> builder,
+        IConfiguration configuration)
     {
-        /// <summary>
-        /// Add required services to ASP.NET container.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
-        /// <returns></returns>
-        public static IEventSourcingBuilder UseMongoDb(
-            this IEventSourcingBuilder builder,
-            IConfiguration configuration)
-        {
-            return UseMongoDb<Snapshot>(builder, configuration);
-        }
+        return UseMongoDb<EventData>(builder, configuration);
+    }
 
-        /// <summary>
-        /// Add required services to ASP.NET container.
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static IEventSourcingBuilder UseMongoDb<T>(
-            this IEventSourcingBuilder builder,
-            IConfiguration configuration)
-            where T : Snapshot
-        {
-            if (builder is null) throw new ArgumentNullException(nameof(builder));
-            if (configuration is null) throw new ArgumentNullException(nameof(configuration));
+    /// <summary>
+    /// Adds required services to ASP.NET container to use event sourcing with MongoDb
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="configuration"></param>
+    /// <param name="classMapInitializer"></param>
+    /// <typeparam name="TEventData"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static EventSourcingExtensionsBuilder<TEventData> UseMongoDb<TEventData>(
+        this EventSourcingExtensionsBuilder<TEventData> builder,
+        IConfiguration configuration,
+        Action<BsonClassMap<TEventData>>? classMapInitializer = null)
+        where TEventData : EventData
+    {
+        if (builder is null) throw new ArgumentNullException(nameof(builder));
+        if (configuration is null) throw new ArgumentNullException(nameof(configuration));
 
-            builder.Services.Configure<EventSourcingDatabaseSettings>(
-                configuration.GetSection(nameof(EventSourcingDatabaseSettings)));
+        builder.Services.Configure<EventSourcingDbSettings>(
+            configuration.GetSection(nameof(EventSourcingDbSettings)));
 
-            builder.Services.AddSingleton<IEventSourcingDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<EventSourcingDatabaseSettings>>().Value);
+        builder.Services.AddSingleton(sp =>
+            sp.GetRequiredService<IOptions<EventSourcingDbSettings>>().Value);
 
-            builder.Services.AddScoped<IEventSourcingDbContext<T>, EventSourcingDbContext<T>>();
+        builder.Services.AddScoped<EventSourcingDbContext<TEventData>>();
+        builder.Services.AddScoped<IEventDataRepository<TEventData>, EventDataRepository<TEventData>>();
 
-            if (typeof(T) == typeof(Snapshot))
-            {
-                builder.Services.AddScoped<ISnapshotRepository, SnapshotRepository>();
-                SnapshotMap.ConfigureMap();
-            }
-            else
-            {
-                builder.Services.AddScoped<ISnapshotRepository<T>, SnapshotRepository<T>>();
-                SnapshotMap.ConfigureGenericMap<T>();
-            }
+        if (typeof(TEventData) == typeof(EventData))
+            EventDataMap.ConfigureMap();
+        else
+            EventDataMap.ConfigureGenericMap(classMapInitializer);
 
-            return builder;
-        }
+        return builder;
     }
 }

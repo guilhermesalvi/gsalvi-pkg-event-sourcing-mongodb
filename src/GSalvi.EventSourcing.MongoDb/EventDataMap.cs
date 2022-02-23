@@ -15,7 +15,7 @@ internal static class EventDataMap
             cm.AutoMap();
             cm.MapIdMember(x => x.Id).SetSerializer(new GuidSerializer(BsonType.String));
             cm.MapMember(x => x.AggregateId).SetSerializer(new GuidSerializer(BsonType.String));
-            cm.MapMember(x => x.Timestamp).SetSerializer(new DateTimeSerializer(BsonType.DateTime));
+            cm.MapMember(x => x.Timestamp).SetSerializer(DateTimeSerializer.UtcInstance);
         });
     }
 
@@ -28,7 +28,7 @@ internal static class EventDataMap
             cm.SetIsRootClass(true);
             cm.MapIdMember(x => x.Id).SetSerializer(new GuidSerializer(BsonType.String));
             cm.MapMember(x => x.AggregateId).SetSerializer(new GuidSerializer(BsonType.String));
-            cm.MapMember(x => x.Timestamp).SetSerializer(DateTimeSerializer.LocalInstance);
+            cm.MapMember(x => x.Timestamp).SetSerializer(DateTimeSerializer.UtcInstance);
         });
 
         if (classMapInitializer is null)

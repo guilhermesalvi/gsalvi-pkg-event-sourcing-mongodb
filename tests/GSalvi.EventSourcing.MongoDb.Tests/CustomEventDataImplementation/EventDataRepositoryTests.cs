@@ -33,6 +33,7 @@ public class EventDataRepositoryTests
         var eventData = _fixture
             .Build<CustomEventData>()
             .With(x => x.Entity, customerRegistered)
+            .With(x => x.Timestamp, DateTime.UtcNow)
             .Create();
 
         // Act
